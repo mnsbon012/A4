@@ -11,7 +11,9 @@ private
 	
 public
 	Tree(int x, int y, float e){
-		xpos=x; ypos=y; ext=e;
+		xpos=x;
+		ypos=y;
+		ext=e;
 	}
 	
 	// return the x-position of the tree center
@@ -49,4 +51,32 @@ public
 	void sungrow(Land land) {
 		// to do
 	}
+
+	public int getStartX() {
+		int startX = xpos - (int) ext;
+		if (startX >= 0) {
+			return startX;
+		}
+		return 0;
+	}
+
+	public int getStartY() {
+		int startY = ypos - (int) ext;
+		if (startY >= 0) {
+			return startY;
+		}
+		return 0;
+	}
+
+	public int getEndX() {
+		int endX = xpos + (int) ext;
+		return endX;
+	}
+
+	public int getEndY() {
+		int endY = ypos + (int) ext;
+		return endY;
+	}
+
+
 }

@@ -12,6 +12,10 @@ public class TreeGrow {
 	static int frameX;
 	static int frameY;
 	static ForestPanel fp;
+	static JButton resetB;
+	static JButton pauseB;
+	static JButton playB;
+	static JButton endB;
 
 	// start timer
 	private static void tick(){
@@ -34,17 +38,29 @@ public class TreeGrow {
       	JPanel g = new JPanel();
         g.setLayout(new BoxLayout(g, BoxLayout.PAGE_AXIS)); 
       	g.setPreferredSize(fsize);
- 
+
+      	resetB = new JButton("Reset");
+      	pauseB = new JButton("Pause");
+      	playB = new JButton("Play");
+      	endB = new JButton("End");
+
 		fp = new ForestPanel(trees);
 		fp.setPreferredSize(new Dimension(frameX,frameY));
 		JScrollPane scrollFrame = new JScrollPane(fp);
 		fp.setAutoscrolls(true);
 		scrollFrame.setPreferredSize(fsize);
 	    g.add(scrollFrame);
-    	
+
+	//	JPanel toolBar = new JPanel;
+//add buttons to panel then add panel to frAME
+
       	frame.setLocationRelativeTo(null);  // Center window on screen.
       	frame.add(g); //add contents to window
-        frame.setContentPane(g);     
+        frame.setContentPane(g);
+
+     //   toolBar.add(resetB);
+
+
         frame.setVisible(true);
         Thread fpt = new Thread(fp);
         fpt.start();
@@ -64,6 +80,11 @@ public class TreeGrow {
 		// read in forest and landscape information from file supplied as argument
 		sundata.readData(args[0]);
 		System.out.println("Data loaded");
+
+		sundata.sunmap.printArr();
+		sundata.sunmap.shadow(sundata.trees[0]);
+		System.out.println("");
+		sundata.sunmap.printShadedArr();
 		
 		frameX = sundata.sunmap.getDimX();
 		frameY = sundata.sunmap.getDimY();

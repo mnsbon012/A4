@@ -81,14 +81,14 @@ public class Land{
 			xEnd = width-1;
 		}
 
-		for (int y=tree.getStartY(); y< yEnd; y++){
-			for (int x=tree.getStartX(); x<xEnd; x++){
+		for (int y=tree.getStartY(); y<= yEnd; y++){
+			for (int x=tree.getStartX(); x<=xEnd; x++){
 				shadedSun[y][x] = shadedSun[y][x]*shadefraction;
 			}
 		}
 	}
 
-	public void printArr(){
+/*	public void printArr(){
 		for (int y =0; y<height; y++){
 
 			for (int x=0; x<width; x++){
@@ -107,4 +107,5 @@ public class Land{
 			System.out.println("");
 		}
 	}
+*/
 }

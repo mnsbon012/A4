@@ -1,21 +1,23 @@
 
 
 import javax.swing.*;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 
 public class TreeGrow {
-	static long startTime = 0;
-	static int frameX;
-	static int frameY;
-	static ForestPanel fp;
+	private static long startTime = 0;
+	private static int frameX;
+	private static int frameY;
+	private static ForestPanel fp;
+	static JPanel optionsPanel;
 	static JButton resetB;
 	static JButton pauseB;
 	static JButton playB;
 	static JButton endB;
+	static JLabel year;
 
 	// start timer
 	private static void tick(){
@@ -39,11 +41,6 @@ public class TreeGrow {
         g.setLayout(new BoxLayout(g, BoxLayout.PAGE_AXIS)); 
       	g.setPreferredSize(fsize);
 
-      	resetB = new JButton("Reset");
-      	pauseB = new JButton("Pause");
-      	playB = new JButton("Play");
-      	endB = new JButton("End");
-
 		fp = new ForestPanel(trees);
 		fp.setPreferredSize(new Dimension(frameX,frameY));
 		JScrollPane scrollFrame = new JScrollPane(fp);
@@ -51,15 +48,52 @@ public class TreeGrow {
 		scrollFrame.setPreferredSize(fsize);
 	    g.add(scrollFrame);
 
-	//	JPanel toolBar = new JPanel;
+		optionsPanel = new JPanel();
+
+		resetB = new JButton("Reset");
+		pauseB = new JButton("Pause");
+		playB = new JButton("Play");
+		endB = new JButton("End");
+		year = new JLabel("year: ");		//NOT TEXT FIELD!!
+
+		resetB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("reset");
+			}
+		});
+		pauseB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("pause");
+			}
+		});
+		playB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("play");
+			}
+		});
+		endB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("end");
+			}
+		});
+
+		optionsPanel.add(resetB);
+		optionsPanel.add(pauseB);
+		optionsPanel.add(playB);
+		optionsPanel.add(endB);
+		optionsPanel.add(year);
+
 //add buttons to panel then add panel to frAME
 
       	frame.setLocationRelativeTo(null);  // Center window on screen.
       	frame.add(g); //add contents to window
         frame.setContentPane(g);
 
-     //   toolBar.add(resetB);
-
+        frame.add(optionsPanel);
 
         frame.setVisible(true);
         Thread fpt = new Thread(fp);
@@ -81,11 +115,11 @@ public class TreeGrow {
 		sundata.readData(args[0]);
 		System.out.println("Data loaded");
 
-		sundata.sunmap.printArr();
+/*		sundata.sunmap.printArr();
 		sundata.sunmap.shadow(sundata.trees[0]);
 		System.out.println("");
 		sundata.sunmap.printShadedArr();
-		
+	*/
 		frameX = sundata.sunmap.getDimX();
 		frameY = sundata.sunmap.getDimY();
 		setupGUI(frameX, frameY, sundata.trees);

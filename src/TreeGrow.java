@@ -17,7 +17,8 @@ public class TreeGrow {
 	static JButton pauseB;
 	static JButton playB;
 	static JButton endB;
-	static JLabel year;
+	static JLabel yearL;
+	static int year;
 
 	// start timer
 	private static void tick(){
@@ -54,38 +55,50 @@ public class TreeGrow {
 		pauseB = new JButton("Pause");
 		playB = new JButton("Play");
 		endB = new JButton("End");
-		year = new JLabel("year: ");		//NOT TEXT FIELD!!
+		yearL = new JLabel("year: "+year);		//NOT TEXT FIELD!!
+
+
+		optionsPanel.add(resetB);
+		optionsPanel.add(pauseB);
+		optionsPanel.add(playB);
+		optionsPanel.add(endB);
+		optionsPanel.add(yearL);
+
 
 		resetB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				for (int t=0; t<trees.length ; t++){
+					trees[t].setExt((float)0.4);
+				}
+				year = 0;
 				System.out.println("reset");
 			}
 		});
+
 		pauseB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("pause");
 			}
 		});
+
 		playB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Thread fpt = new Thread(fp);
+				fpt.start();
 				System.out.println("play");
 			}
 		});
+
 		endB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 				System.out.println("end");
 			}
 		});
-
-		optionsPanel.add(resetB);
-		optionsPanel.add(pauseB);
-		optionsPanel.add(playB);
-		optionsPanel.add(endB);
-		optionsPanel.add(year);
 
 //add buttons to panel then add panel to frAME
 

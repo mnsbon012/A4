@@ -72,20 +72,22 @@ public class Land{
 	// within the extent of <tree>
 	void shadow(Tree tree){
 		// to do
-		int yEnd = tree.getEndY();
-		if (yEnd >= height){
-			yEnd = height-1;
-		}
-		int xEnd = tree.getEndX();
-		if (xEnd >= width){
-			xEnd = width-1;
-		}
+		int yEnd = tree.getEndY(height);
+		int xEnd = tree.getEndX(width);
 
 		for (int y=tree.getStartY(); y<= yEnd; y++){
 			for (int x=tree.getStartX(); x<=xEnd; x++){
 				shadedSun[y][x] = shadedSun[y][x]*shadefraction;
 			}
 		}
+	}
+
+	public int getHeight(){
+		return height;
+	}
+
+	public int getWidth(){
+		return width;
 	}
 
 /*	public void printArr(){

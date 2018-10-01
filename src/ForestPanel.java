@@ -13,7 +13,9 @@ public class ForestPanel extends JPanel implements Runnable {
 	ForestPanel(Tree[] trees) {
 		forest=trees;
 	}
-	
+
+
+
 	// display the forest of trees 
 	public void paintComponent(Graphics g) {
 		int width = getWidth();

@@ -61,10 +61,10 @@ public class ForestPanel extends JPanel implements Runnable {
 	
 	public void run() {
 
-		rndorder = new ArrayList<Integer>();
-		for (int n=0; n<forest.length; n++){
-			rndorder.add(n);
-		}
+//		rndorder = new ArrayList<Integer>();
+//		for (int n=0; n<forest.length; n++){
+//			rndorder.add(n);
+//		}
 
 		java.util.Collections.shuffle(rndorder);
 		

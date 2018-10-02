@@ -7,14 +7,18 @@ private
 	int ypos;	// y-coorindate of center of tree canopy
 	float ext;	// extent of canopy out in vertical and horizontal from center
 	//float maxExt;	// size of canopy
+	int width;	//dimensions of forrest
+	int height;
 	
-	static float growfactor = 1000.0f; // divide average sun exposure by this amount to get growth in extent
+	static float growfactor = 10.0f; // divide average sun exposure by this amount to get growth in extent
 	
 public
 	Tree(int x, int y, float e){
 		xpos=x;
 		ypos=y;
 		ext=0.4f;
+	//	width=w;
+	//	height=h;
 		//maxExt = e;
 	}
 	
@@ -56,15 +60,27 @@ public
 	boolean inrange(float minr, float maxr) {
 		return (ext >= minr && ext < maxr);
 	}
+
+	public float averageExposure(Land land){
+		float totalExposure = sunexposure(land);
+		int width = getEndX(land.getWidth())- getStartX();
+		int height = getEndY(land.getHeight())-getStartY();
+		float averageExposure = totalExposure/(width*height);
+		return averageExposure;
+
+	}
 	
 	// grow a tree according to its sun exposure
 	void sungrow(Land land) {
 		// to do
-		float totalExposure = sunexposure(land);		// gets total sunlight for tree
+		//float totalExposure = sunexposure(land);		// gets total sunlight for tree
+		float averageExposure =averageExposure(land);
 		land.shadow(this);							// then shadows land according to trees extent
 		// must now grow tree
-		float averageExposure = totalExposure/(((int)ext*2)^2);
+
+		//float averageExposure = totalExposure/(((int)ext*2)^2);
 		ext+=averageExposure/growfactor;
+		//land.shadow(this);							// then shadows land according to trees extent
 		//checkExt(ext);
 	}
 
@@ -73,6 +89,7 @@ public
 			ext=20.0f;
 		}
 	}
+
 
 	public int getStartX() {
 		int startX = xpos - (int) ext;

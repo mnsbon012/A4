@@ -48,7 +48,7 @@ public
 				totalExposure = totalExposure + land.getShade(x,y); //needs to be safe access to shadedSun
 			}
 		}
-		land.shadow(this);
+	//	land.shadow(this);
 		return totalExposure;
 	}
 	
@@ -61,10 +61,17 @@ public
 	void sungrow(Land land) {
 		// to do
 		float totalExposure = sunexposure(land);		// gets total sunlight for tree
-														// then shadows land according to trees extent
+		land.shadow(this);							// then shadows land according to trees extent
 		// must now grow tree
 		float averageExposure = totalExposure/(((int)ext*2)^2);
 		ext+=averageExposure/growfactor;
+		//checkExt(ext);
+	}
+
+	public void checkExt(float e){
+		if ((int)e>20){
+			ext=20.0f;
+		}
 	}
 
 	public int getStartX() {

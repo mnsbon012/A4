@@ -18,7 +18,7 @@ public class TreeGrow {
 	static JButton playB;
 	static JButton endB;
 	static JLabel yearL;
-	static int year;
+	//static int year;
 
 	// start timer
 	private static void tick(){
@@ -55,7 +55,9 @@ public class TreeGrow {
 		pauseB = new JButton("Pause");
 		playB = new JButton("Play");
 		endB = new JButton("End");
-		yearL = new JLabel("year: "+year);		//NOT TEXT FIELD!!
+
+		yearL = new JLabel("year: "+fp.getYear());
+		//fp.setJLable(yearL);
 
 
 		optionsPanel.add(resetB);
@@ -76,6 +78,7 @@ public class TreeGrow {
 		pauseB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//fp.pause
 				System.out.println("pause");
 			}
 		});

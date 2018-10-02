@@ -2,7 +2,7 @@
 import java.awt.Color;
 import java.util.Random;
 import java.awt.Graphics;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.util.*;
 
 
@@ -11,7 +11,8 @@ public class ForestPanel extends JPanel implements Runnable {
 	List<Integer> rndorder; // permutation of tree indices so that rendering is less structured
 	int year;
 	Land land;
-	
+	private JLabel yearL;
+
 	ForestPanel(Tree[] trees, Land sunMap) {
 		forest=trees;
 		year = 0;
@@ -22,6 +23,9 @@ public class ForestPanel extends JPanel implements Runnable {
 			rndorder.add(l);
 	}
 
+	public int getYear(){
+		return year;
+	}
 
 
 	// display the forest of trees 
@@ -34,8 +38,8 @@ public class ForestPanel extends JPanel implements Runnable {
 		Random rnd = new Random(0); // providing the same seed gives trees consistent colouring
 
 		// start from small trees of [0, 2) extent
-		float minh = 0.0f;
-		float maxh = 2.0f;
+		float minh = 0.0f; //18.0f;
+		float maxh = 2.0f; //20.0f;
 		for(int layer = 0; layer <= 10; layer++) {
 			for(int t = 0; t < forest.length; t++){
 				int rt = rndorder.get(t); 
@@ -50,11 +54,17 @@ public class ForestPanel extends JPanel implements Runnable {
 			}
 			minh = maxh;  // next band of trees
 			maxh += 2.0f;
+			//maxh=minh;
+			//minh-=2.0f;
 		}	
 	}
 	
 	public void run() {
-			
+
+		rndorder = new ArrayList<Integer>();
+		for (int n=0; n<forest.length; n++){
+			rndorder.add(n);
+		}
 
 		java.util.Collections.shuffle(rndorder);
 		
@@ -69,6 +79,7 @@ public class ForestPanel extends JPanel implements Runnable {
 			year++;
 			land.resetShade();;
 			System.out.println(year);
+			//yearL.setText("year: "+year);
 	//		repaint();
 		}
 	}
@@ -81,8 +92,8 @@ public class ForestPanel extends JPanel implements Runnable {
 		//JLable set
 	}
 
-//	public JLabel setJLable(JLabel year){
-
-//	}
+	public void setJLable(JLabel year){
+			yearL =year;
+	}
 
 }

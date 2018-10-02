@@ -9,9 +9,17 @@ import java.util.*;
 public class ForestPanel extends JPanel implements Runnable {
 	Tree[] forest;	// trees to render
 	List<Integer> rndorder; // permutation of tree indices so that rendering is less structured
+	int year;
+	Land land;
 	
-	ForestPanel(Tree[] trees) {
+	ForestPanel(Tree[] trees, Land sunMap) {
 		forest=trees;
+		year = 0;
+		land =sunMap;
+		// reordering so that trees are rendered in a more random fashion
+		rndorder = new ArrayList<Integer>();
+		for(int l = 0; l < forest.length; l++)
+			rndorder.add(l);
 	}
 
 
@@ -47,21 +55,34 @@ public class ForestPanel extends JPanel implements Runnable {
 	
 	public void run() {
 			
-		// reordering so that trees are rendered in a more random fashion
-		rndorder = new ArrayList<Integer>();
-		for(int l = 0; l < forest.length; l++)
-			rndorder.add(l);
+
 		java.util.Collections.shuffle(rndorder);
 		
 		// render loop
 		while(true) {
+			//paintComponent(getGraphics());
 			repaint();
-			try {
-				Thread.sleep(20); 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			};
+			for (Tree t:forest){
+				t.sungrow(land);
+			}// create parallel class that takes in tree array land array and low and high.. 10000
+			// forkJoin
+			year++;
+			land.resetShade();;
+			System.out.println(year);
+	//		repaint();
 		}
 	}
+
+	public void reset(){
+		year = 0;
+		for(Tree t:forest){
+			t.setExt(0.4f);
+		}
+		//JLable set
+	}
+
+//	public JLabel setJLable(JLabel year){
+
+//	}
 
 }

@@ -30,7 +30,7 @@ public class TreeGrow {
 		return (System.currentTimeMillis() - startTime) / 1000.0f; 
 	}
 	
-	public static void setupGUI(int frameX,int frameY,Tree [] trees) {
+	public static void setupGUI(int frameX,int frameY,Tree [] trees, Land land) {
 		Dimension fsize = new Dimension(800, 800);
 		// Frame init and dimensions
     	JFrame frame = new JFrame("Photosynthesis"); 
@@ -42,7 +42,7 @@ public class TreeGrow {
         g.setLayout(new BoxLayout(g, BoxLayout.PAGE_AXIS)); 
       	g.setPreferredSize(fsize);
 
-		fp = new ForestPanel(trees);
+		fp = new ForestPanel(trees, land);
 		fp.setPreferredSize(new Dimension(frameX,frameY));
 		JScrollPane scrollFrame = new JScrollPane(fp);
 		fp.setAutoscrolls(true);
@@ -68,10 +68,7 @@ public class TreeGrow {
 		resetB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for (int t=0; t<trees.length ; t++){
-					trees[t].setExt((float)0.4);
-				}
-				year = 0;
+				fp.reset();
 				System.out.println("reset");
 			}
 		});
@@ -96,7 +93,7 @@ public class TreeGrow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
-				System.out.println("end");
+//				System.out.println("end");
 			}
 		});
 
@@ -109,8 +106,8 @@ public class TreeGrow {
         frame.add(optionsPanel);
 
         frame.setVisible(true);
-        Thread fpt = new Thread(fp);
-        fpt.start();
+    //    Thread fpt = new Thread(fp);
+       // fpt.start();
 	}
 	
 		
@@ -135,8 +132,9 @@ public class TreeGrow {
 	*/
 		frameX = sundata.sunmap.getDimX();
 		frameY = sundata.sunmap.getDimY();
-		setupGUI(frameX, frameY, sundata.trees);
+		setupGUI(frameX, frameY, sundata.trees, sundata.sunmap);
 		
 		// create and start simulation loop here as separate thread
+
 	}
 }

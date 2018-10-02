@@ -6,7 +6,7 @@ private
 	int xpos;	// x-coordinate of center of tree canopy
 	int ypos;	// y-coorindate of center of tree canopy
 	float ext;	// extent of canopy out in vertical and horizontal from center
-	float maxExt;	// size of canopy
+	//float maxExt;	// size of canopy
 	
 	static float growfactor = 1000.0f; // divide average sun exposure by this amount to get growth in extent
 	
@@ -15,7 +15,7 @@ public
 		xpos=x;
 		ypos=y;
 		ext=0.4f;
-		maxExt = e;
+		//maxExt = e;
 	}
 	
 	// return the x-position of the tree center
@@ -63,8 +63,8 @@ public
 		float totalExposure = sunexposure(land);		// gets total sunlight for tree
 														// then shadows land according to trees extent
 		// must now grow tree
-		float averageExpose = totalExposure/(((int)ext*2)^2);
-		setExt(ext+totalExposure/1000);
+		float averageExposure = totalExposure/(((int)ext*2)^2);
+		ext+=averageExposure/growfactor;
 	}
 
 	public int getStartX() {
@@ -102,9 +102,6 @@ public
 
 
 
-	public float getMaxExt(){
-		return maxExt;
-	}
 
 
 

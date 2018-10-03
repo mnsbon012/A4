@@ -35,7 +35,7 @@ public class Simulation implements Runnable {
 
     public void pause(){
         play=false;
-        pause = true;
+//        pause = true;
     }
 
     public void end(){
@@ -44,8 +44,9 @@ public class Simulation implements Runnable {
     }
 
     public void resume(){
-        pause = false;
+//        pause = false;
         play = true;
+        //run();
     }
 
     public void reset(){

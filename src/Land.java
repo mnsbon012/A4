@@ -84,32 +84,11 @@ public class Land{
 		return width;
 	}
 
-//	public void aquireLock(int x, int y){
-//		lock[x][y]=new Object();
-//	}
-
-//	public Object locked(int x, int y){
-//		return lock[x][y];
-//	}
-
-/*	public void printArr(){
-		for (int y =0; y<height; y++){
-
-			for (int x=0; x<width; x++){
-				System.out.print(initialSun[y][x]+" ");
-			}
-			System.out.println("");
-		}
+	public void initLock(int x, int y){
+		lock[y][x] = new Object();
 	}
 
-	public void printShadedArr(){
-		for (int y =0; y<height; y++){
-
-			for (int x=0; x<width; x++){
-				System.out.print(shadedSun[y][x]+" ");
-			}
-			System.out.println("");
-		}
+	Object locks(int x, int y){
+		return lock[y][x];
 	}
-*/
 }

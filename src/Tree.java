@@ -82,10 +82,8 @@ public
 		float averageExposure =averageExposure(land);
 		land.shadow(this);							// then shadows land according to trees extent
 		// must now grow tree
-
 		//float averageExposure = totalExposure/(((int)ext*2)^2);
 		ext+=averageExposure/growfactor;
-		//land.shadow(this);							// then shadows land according to trees extent
 		checkExt(ext);
 	}
 

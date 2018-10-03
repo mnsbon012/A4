@@ -94,7 +94,7 @@ public class TreeGrow
 			public void actionPerformed(ActionEvent e) {
 				//fp.pause
 				s.pause();
-				System.out.println("pause");
+//				System.out.println("pause");
 			}
 		});
 
@@ -102,24 +102,16 @@ public class TreeGrow
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!s.play){
-					if (s.pause) {
-						s.pause=false;
-						s.play=true;
-						s.resume();
-					}
-					else {
-						//s.play=true;
-						s.play = true;
-						s.resume();
-						//Thread runner = new Thread(s);
-						//runner.start();
-					}
-					System.out.println("play");
+					s.resume();
+					Thread runner = new Thread(s);
+					runner.start();
+//					System.out.println("play");
 				}
+
 				else {
 					Thread runner = new Thread(s);
 					runner.start();
-					System.out.println("play");
+//					System.out.println("play");
 				}
 			}
 		});
@@ -133,9 +125,7 @@ public class TreeGrow
 			}
 		});
 
-//add buttons to panel then add panel to frAME
-
-		//frame.add(optionsPanel);
+//add buttons to panel then add panel to frame
 
         frame.setVisible(true);
         Thread fpt = new Thread(fp);

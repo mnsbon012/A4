@@ -23,7 +23,8 @@ public class SunData{
 			sunmap = new Land(dimx,dimy);
 			for(int y = 0; y < dimy; y++)		//fixed y before x loop
 				for(int x = 0; x < dimy; x++) {
-					sunmap.setFull(x,y,sc.nextFloat());	
+					sunmap.setFull(x,y,sc.nextFloat());
+					sunmap.initLock(x,y);
 				}
 			sunmap.resetShade();
 			

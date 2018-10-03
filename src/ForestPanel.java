@@ -18,9 +18,9 @@ public class ForestPanel extends JPanel implements Runnable {
 		year = 0;
 		land =sunMap;
 		// reordering so that trees are rendered in a more random fashion
-		rndorder = new ArrayList<Integer>();
-		for(int l = 0; l < forest.length; l++)
-			rndorder.add(l);
+//		rndorder = new ArrayList<Integer>();
+//		for(int l = 0; l < forest.length; l++)
+//			rndorder.add(l);
 	}
 
 	public int getYear(){
@@ -28,7 +28,8 @@ public class ForestPanel extends JPanel implements Runnable {
 	}
 
 
-	// display the forest of trees 
+	// display the forest of trees
+	@Override
 	public void paintComponent(Graphics g) {
 		int width = getWidth();
 		int height = getHeight();
@@ -58,29 +59,45 @@ public class ForestPanel extends JPanel implements Runnable {
 			//minh-=2.0f;
 		}	
 	}
-	
+		@Override
 	public void run() {
 
-//		rndorder = new ArrayList<Integer>();
-//		for (int n=0; n<forest.length; n++){
-//			rndorder.add(n);
-//		}
+		rndorder = new ArrayList<Integer>();
+		for (int n=0; n<forest.length; n++){
+			rndorder.add(n);
+		}
 
 		java.util.Collections.shuffle(rndorder);
 		
 		// render loop
 		while(true) {
 			//paintComponent(getGraphics());
-			repaint();
-			for (Tree t:forest){
-				t.sungrow(land);
-			}// create parallel class that takes in tree array land array and low and high.. 10000
+			//repaint();
+			//for (Tree t:forest){
+			//	t.sungrow(land);
+			//}// create parallel class that takes in tree array land array and low and high.. 10000
 			// forkJoin
-			year++;
-			land.resetShade();;
-			System.out.println(year);
+			//year++;
+			//land.resetShade();;
+			//System.out.println(year);
 			//yearL.setText("year: "+year);
 	//		repaint();
+			// reordering so that trees are rendered in a more random fashion
+			rndorder = new ArrayList<Integer>();
+			for(int l = 0; l < forest.length; l++)
+				rndorder.add(l);
+			java.util.Collections.shuffle(rndorder);
+
+			// render loop
+			while(true) {
+				repaint();
+				try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				};
+			}
+
 		}
 	}
 

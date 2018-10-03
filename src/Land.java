@@ -5,6 +5,7 @@ public class Land{
 	float[][] shadedSun;
 	int width;
 	int height;
+	private Object lock[][];
 	// to do
 	// sun exposure data here
 
@@ -13,8 +14,10 @@ public class Land{
 	Land(int dx, int dy) {
 		width = dx;
 		height = dy;
-		initialSun = new float[dy][dx];
-		shadedSun = new float[dy][dx];
+		initialSun = new float[height][width];
+		shadedSun = new float[height][width];
+		lock=new Object[height][width];
+
 
 		// to do
 	}
@@ -67,8 +70,8 @@ public class Land{
 
 		for (int y=tree.getStartY(); y<= yEnd; y++){
 			for (int x=tree.getStartX(); x<=xEnd; x++){
-				float shade = shadedSun[y][x]*shadefraction;
-				setShade(x,y,shade);
+				//float shade = shadedSun[y][x]*shadefraction;
+				setShade(x,y,getShade(x,y)*shadefraction);
 			}
 		}
 	}
@@ -79,6 +82,14 @@ public class Land{
 
 	public int getWidth(){
 		return width;
+	}
+
+	public void aquireLock(int x, int y){
+		lock[x][y]=new Object();
+	}
+
+	public Object locked(int x, int y){
+		return lock[x][y];
 	}
 
 /*	public void printArr(){

@@ -7,11 +7,12 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class TreeGrow {
-	private static long startTime = 0;
-	private static int frameX;
-	private static int frameY;
-	private static ForestPanel fp;
+public class TreeGrow
+{
+	static long startTime = 0;
+	static int frameX;
+	static int frameY;
+	static ForestPanel fp;
 	static JPanel optionsPanel;
 	static JButton resetB;
 	static JButton pauseB;
@@ -21,16 +22,19 @@ public class TreeGrow {
 	//static int year;
 
 	// start timer
-	private static void tick(){
+	private static void tick()
+	{
 		startTime = System.currentTimeMillis();
 	}
 	
 	// stop timer, return time elapsed in seconds
-	private static float tock(){
+	private static float tock()
+	{
 		return (System.currentTimeMillis() - startTime) / 1000.0f; 
 	}
 	
-	public static void setupGUI(int frameX,int frameY,Tree [] trees, Land land) {
+	public static void setupGUI(int frameX,int frameY,Tree [] trees, Land land)
+	{
 		Dimension fsize = new Dimension(800, 800);
 		// Frame init and dimensions
     	JFrame frame = new JFrame("Photosynthesis"); 
@@ -49,22 +53,30 @@ public class TreeGrow {
 		scrollFrame.setPreferredSize(fsize);
 	    g.add(scrollFrame);
 
+		frame.setLocationRelativeTo(null);  // Center window on screen.
+		frame.add(g); //add contents to window
+
+		frame.setContentPane(g);
+
 		optionsPanel = new JPanel();
 
 		resetB = new JButton("Reset");
-		pauseB = new JButton("Pause");
-		playB = new JButton("Play");
-		endB = new JButton("End");
-
-		yearL = new JLabel("year: "+fp.getYear());
-		//fp.setJLable(yearL);
-
-
 		optionsPanel.add(resetB);
+
+		pauseB = new JButton("Pause");
 		optionsPanel.add(pauseB);
+
+		playB = new JButton("Play");
 		optionsPanel.add(playB);
+
+		endB = new JButton("End");
 		optionsPanel.add(endB);
+
+		yearL = new JLabel("year: ");
 		optionsPanel.add(yearL);
+		fp.setJLable(yearL);
+
+		frame.add(optionsPanel);
 
 
 		resetB.addActionListener(new ActionListener() {
@@ -96,17 +108,13 @@ public class TreeGrow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
-//				System.out.println("end");
+				//System.out.println("end");
 			}
 		});
 
 //add buttons to panel then add panel to frAME
 
-      	frame.setLocationRelativeTo(null);  // Center window on screen.
-      	frame.add(g); //add contents to window
-        frame.setContentPane(g);
-
-        frame.add(optionsPanel);
+		//frame.add(optionsPanel);
 
         frame.setVisible(true);
     //    Thread fpt = new Thread(fp);

@@ -46,7 +46,7 @@ public
 	// also calls on the shadow method in land inputed after calculating exposure
 	float sunexposure(Land land){
 		// to do
-		float totalExposure=0;
+		float totalExposure=0.00f;
 		for (int y=getStartY(); y<=getEndY(land.getHeight()); y++){
 			for (int x=getStartX();x<=getEndX(land.getWidth());x++){
 				totalExposure = totalExposure + land.getShade(x,y); //needs to be safe access to shadedSun
@@ -63,13 +63,17 @@ public
 
 	public float averageExposure(Land land){
 		float totalExposure = sunexposure(land);
-		int width = getEndX(land.getWidth())- getStartX();
-		int height = getEndY(land.getHeight())-getStartY();
-		float averageExposure = totalExposure/(width*height);
+		int area =getArea(land);
+		float averageExposure = totalExposure/area;
 		return averageExposure;
 
 	}
-	
+	public int getArea(Land land){
+		int width = getEndX(land.getWidth())- getStartX();
+		int height = getEndY(land.getHeight())-getStartY();
+		return height*width;
+	}
+
 	// grow a tree according to its sun exposure
 	void sungrow(Land land) {
 		// to do

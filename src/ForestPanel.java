@@ -55,6 +55,7 @@ public class ForestPanel extends JPanel implements Runnable {
 
 		// render loop
 		while (true) {
+			//paintComponent(getGraphics());
 			repaint();
 			try {
 				Thread.sleep(20);

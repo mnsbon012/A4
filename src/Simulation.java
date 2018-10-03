@@ -18,9 +18,9 @@ public class Simulation implements Runnable {
     public void run(){
         while (!end){
             while (play){
-//                Grow.setLand(sunD.sunmap);
+                Grow.setLand(sunD.sunmap);
 //                pool.invoke(new Grow(sunD.trees,0, sunD.trees.length));
-//                sunD.sunmap.resetShade();
+  //              sunD.sunmap.resetShade();
                 for(Tree t: sunD.trees){
                     t.sungrow(sunD.sunmap);
                 }
@@ -28,16 +28,6 @@ public class Simulation implements Runnable {
                 TreeGrow.yearL.setText("year: "+year);
 
             }
- //           synchronized (lock){
- //               try{
- //                   System.out.println("paused");
- //                   lock.wait();
- //                   System.out.println("play");
- //               } catch (InterruptedException e) {
- //                   Thread.currentThread().interrupt();
- //                   return;
- //               }
- //           }
         }
     }
 
@@ -48,17 +38,12 @@ public class Simulation implements Runnable {
     public void end(){
         play = false;
         end=true;
-//        synchronized (lock){
-//            lock.notifyAll();
-//        }
     }
 
     public void resume(){
         play = true;
-//        synchronized (lock){
-//            lock.notifyAll();
-//        }
     }
+
     public void reset(){
         boolean tempP = play;
         play=false;

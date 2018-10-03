@@ -10,7 +10,7 @@ private
 	int width;	//dimensions of forrest
 	int height;
 	
-	static float growfactor = 10.0f; // divide average sun exposure by this amount to get growth in extent
+	static float growfactor = 1000.0f; // divide average sun exposure by this amount to get growth in extent
 	
 public
 	Tree(int x, int y, float e){
@@ -78,6 +78,7 @@ public
 	void sungrow(Land land) {
 		// to do
 		//float totalExposure = sunexposure(land);		// gets total sunlight for tree
+		checkExt(ext);
 		float averageExposure =averageExposure(land);
 		land.shadow(this);							// then shadows land according to trees extent
 		// must now grow tree
@@ -85,18 +86,18 @@ public
 		//float averageExposure = totalExposure/(((int)ext*2)^2);
 		ext+=averageExposure/growfactor;
 		//land.shadow(this);							// then shadows land according to trees extent
-		//checkExt(ext);
+		checkExt(ext);
 	}
 
 	public void checkExt(float e){
-		if ((int)e>20){
+		if (e>20.0f){
 			ext=20.0f;
 		}
 	}
 
 
 	public int getStartX() {
-		int startX = xpos - (int) ext;
+		int startX = xpos - (int) ext-1;
 		if (startX >= 0) {
 			return startX;
 		}
@@ -104,7 +105,7 @@ public
 	}
 
 	public int getStartY() {
-		int startY = ypos - (int) ext;
+		int startY = ypos - (int) ext-1;
 		if (startY >= 0) {
 			return startY;
 		}
@@ -112,7 +113,7 @@ public
 	}
 
 	public int getEndX(int width) {
-		int endX = xpos + (int) ext;
+		int endX = xpos + (int) ext+1;
 		if (endX >= width){
 			endX = width-1;
 		}
@@ -120,18 +121,11 @@ public
 	}
 
 	public int getEndY(int height) {
-		int endY = ypos + (int) ext;
+		int endY = ypos + (int) ext+1;
 
 		if (endY >= height){
 			endY = height-1;
 		}
 		return endY;
 	}
-
-
-
-
-
-
-
 }

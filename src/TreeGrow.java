@@ -101,9 +101,14 @@ public class TreeGrow
 		playB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Thread runner = new Thread(s);
-				runner.start();
-				System.out.println("play");
+				if (!s.play){
+					s.resume();
+				}
+				else {
+					Thread runner = new Thread(s);
+					runner.start();
+					System.out.println("play");
+				}
 			}
 		});
 
@@ -111,7 +116,7 @@ public class TreeGrow
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				s.end();
-				//System.exit(0);
+				System.exit(0);
 				//System.out.println("end");
 			}
 		});

@@ -3,9 +3,9 @@ import java.util.concurrent.RecursiveAction;
 public class Grow extends RecursiveAction {
     int lo;
     int hi;
-    static final int SEQUENTIAL_CUTOFF= 100;
+    static final int SEQUENTIAL_CUTOFF= 1000;
     Tree trees[];
-    float sunExposure[][];
+//    float sunExposure[][];
     static Land land;
 
     Grow (Tree[] t, int l, int h){
@@ -45,7 +45,7 @@ public class Grow extends RecursiveAction {
 
             if (tree.inrange(minr, maxr)) {
                 tree.sungrow(land);
-                land.shadow(tree);
+                //land.shadow(tree);
             }
         }
     }

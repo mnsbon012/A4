@@ -84,13 +84,13 @@ public class Land{
 		return width;
 	}
 
-	public void aquireLock(int x, int y){
-		lock[x][y]=new Object();
-	}
+//	public void aquireLock(int x, int y){
+//		lock[x][y]=new Object();
+//	}
 
-	public Object locked(int x, int y){
-		return lock[x][y];
-	}
+//	public Object locked(int x, int y){
+//		return lock[x][y];
+//	}
 
 /*	public void printArr(){
 		for (int y =0; y<height; y++){

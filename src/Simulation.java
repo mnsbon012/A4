@@ -6,6 +6,7 @@ public class Simulation implements Runnable {
     SunData sunD;
     boolean play = true;
     boolean end = false;
+    boolean pause=false;
     int year;
 
 
@@ -25,6 +26,7 @@ public class Simulation implements Runnable {
                     t.sungrow(sunD.sunmap);
                 }
                 year++;
+                Grow.land.resetShade();
                 TreeGrow.yearL.setText("year: "+year);
 
             }
@@ -33,6 +35,7 @@ public class Simulation implements Runnable {
 
     public void pause(){
         play=false;
+        pause = true;
     }
 
     public void end(){
@@ -41,6 +44,7 @@ public class Simulation implements Runnable {
     }
 
     public void resume(){
+        pause = false;
         play = true;
     }
 
@@ -51,6 +55,7 @@ public class Simulation implements Runnable {
             t.setExt(0.4f);
         }
         year = 0;
+        TreeGrow.yearL.setText("year: "+year);
         play=tempP;     // if paused and reset will still be paused
     }
 

@@ -45,7 +45,7 @@ public
 	// return the average sunlight for the cells covered by the tree
 	// also calls on the shadow method in land inputed after calculating exposure
 	float sunexposure(Land land){
-		// to do
+		// to
 		float totalExposure=0.00f;
 		for (int y=getStartY(); y<=getEndY(land.getHeight()); y++){
 			for (int x=getStartX();x<=getEndX(land.getWidth());x++){

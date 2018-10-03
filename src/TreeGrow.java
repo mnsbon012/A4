@@ -102,7 +102,19 @@ public class TreeGrow
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!s.play){
-					s.resume();
+					if (s.pause) {
+						s.pause=false;
+						s.play=true;
+						s.resume();
+					}
+					else {
+						//s.play=true;
+						s.play = true;
+						s.resume();
+						//Thread runner = new Thread(s);
+						//runner.start();
+					}
+					System.out.println("play");
 				}
 				else {
 					Thread runner = new Thread(s);

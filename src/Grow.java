@@ -34,43 +34,50 @@ public class Grow extends RecursiveAction {
         }
     }
 
-    private void seqGrow(Tree t[], int lo, int hi,float minr, float maxr){
+    private void seqGrow(Tree t[], int lo, int hi,float minr, float maxr) {
 
-        for (Tree tree:t){
+        for (Tree tree : t) {
             int startX = tree.getStartX();
             int startY = tree.getStartY();
             int endX = tree.getEndX(land.getWidth());
-            int endY= tree.getEndY(land.getHeight());
+            int endY = tree.getEndY(land.getHeight());
             int area = tree.getArea(land);
 
-            int p =0;
-            Object Trees[] = new Object[area];
-
-            for (int y = startY; y<=endY; y++){
-                for (int x=startX; x<=endX; x++){
-                    Trees[p]= land.locked(x,y);
-                    p++;
-                }
+            if (tree.inrange(minr, maxr)) {
+                tree.sungrow(land);
+                land.shadow(tree);
             }
-            lockRun(tree, Trees, Trees.length-1, minr, maxr);
         }
     }
+            //int p =0;
+            //Object Trees[] = new Object[area];
 
-    private void lockRun(Tree t, Object Trees[], int p,float minr,float maxr){
-        if (p>=0){
-            synchronized (Trees[p]){
-                p--;
-                lockRun(t,Trees, p, minr,maxr);
-            }
-        }
-        else{
-            if (t.inrange(minr,maxr)){
-                t.sungrow(land);
-                land.shadow(t);
-            }
-
-        }
-    }
+//            for (int y = startY; y<=endY; y++){
+//                for (int x=startX; x<=endX; x++){
+//
+//                    Trees[p]= land.locked(x,y);
+//                    p++;
+//                }
+//            }
+//            lockRun(tree, Trees, Trees.length-1, minr, maxr);
+//        }
+//    }
+//
+//    private void lockRun(Tree t, Object Trees[], int p,float minr,float maxr){
+//        if (p>=0){
+//            synchronized (Trees[p]){
+//                p--;
+//                lockRun(t,Trees, p, minr,maxr);
+//            }
+//        }
+//        else{
+//            if (t.inrange(minr,maxr)){
+//                t.sungrow(land);
+//                land.shadow(t);
+//            }
+//
+//        }
+//    }
 
 
 }

@@ -19,6 +19,7 @@ public class TreeGrow
 	static JButton playB;
 	static JButton endB;
 	static JLabel yearL;
+	static Simulation s;
 	//static int year;
 
 	// start timer
@@ -46,7 +47,7 @@ public class TreeGrow
         g.setLayout(new BoxLayout(g, BoxLayout.PAGE_AXIS)); 
       	g.setPreferredSize(fsize);
 
-		fp = new ForestPanel(trees, land);
+		fp = new ForestPanel(trees);
 		fp.setPreferredSize(new Dimension(frameX,frameY));
 		JScrollPane scrollFrame = new JScrollPane(fp);
 		fp.setAutoscrolls(true);
@@ -74,7 +75,7 @@ public class TreeGrow
 
 		yearL = new JLabel("year: ");
 		optionsPanel.add(yearL);
-		fp.setJLable(yearL);
+		//fp.setJLable(yearL);
 
 		frame.add(optionsPanel);
 
@@ -82,7 +83,8 @@ public class TreeGrow
 		resetB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fp.reset();
+				//fp.reset();
+				s.reset();
 				System.out.println("reset");
 			}
 		});
@@ -91,6 +93,7 @@ public class TreeGrow
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//fp.pause
+				s.pause();
 				System.out.println("pause");
 			}
 		});
@@ -98,8 +101,8 @@ public class TreeGrow
 		playB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Thread fpt = new Thread(fp);
-				fpt.start();
+				Thread runner = new Thread(s);
+				runner.start();
 				System.out.println("play");
 			}
 		});
@@ -107,7 +110,8 @@ public class TreeGrow
 		endB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				s.end();
+				//System.exit(0);
 				//System.out.println("end");
 			}
 		});
@@ -117,8 +121,8 @@ public class TreeGrow
 		//frame.add(optionsPanel);
 
         frame.setVisible(true);
-    //    Thread fpt = new Thread(fp);
-       // fpt.start();
+        Thread fpt = new Thread(fp);
+        fpt.start();
 	}
 	
 		
@@ -143,8 +147,10 @@ public class TreeGrow
 	*/
 		frameX = sundata.sunmap.getDimX();
 		frameY = sundata.sunmap.getDimY();
+		s = new Simulation(sundata);
 		setupGUI(frameX, frameY, sundata.trees, sundata.sunmap);
-		
+
+
 		// create and start simulation loop here as separate thread
 
 	}

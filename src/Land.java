@@ -84,7 +84,7 @@ public class Land{
 		return width;
 	}
 
-	public void initLock(int x, int y){
+	public void initiateLock(int x, int y){
 		lock[y][x] = new Object();
 	}
 

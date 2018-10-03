@@ -6,7 +6,7 @@ public class Simulation implements Runnable {
     SunData sunD;
     boolean play = true;
     boolean end = false;
-    boolean pause=false;
+//    boolean pause=false;
     int year;
 
 
@@ -21,7 +21,7 @@ public class Simulation implements Runnable {
             while (play){
                 Grow.setLand(sunD.sunmap);
 //                pool.invoke(new Grow(sunD.trees,0, sunD.trees.length));
-  //              sunD.sunmap.resetShade();
+//                sunD.sunmap.resetShade();
                 for(Tree t: sunD.trees){
                     t.sungrow(sunD.sunmap);
                 }
